@@ -3,9 +3,9 @@ var board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 var placeCount = 0;
 var boardState = 'playing';
 var pieces = {
-  1: 'O',
-  0: '_',
-  '-1': 'X'
+  1: '👨‍🌾',
+  0: '',
+  '-1': '☠'
 };
 var outcomes = {
   1: 'O Wins! X lost. Shame, this game should always be a draw. Go study.',
@@ -48,7 +48,6 @@ var onClickPiece = function (coordinates) {
   if (boardState !== 'playing') {
     return;
   }
-
   // if valid location, toggle square, switch player
   if (board[coordinates[0]][coordinates[1]] === 0) {
     toggleSquare(currPlayer, coordinates);
@@ -61,6 +60,18 @@ var onClickPiece = function (coordinates) {
 // toggles a square at a coordinates
 var toggleSquare = function (player, coordinates) {
   board[coordinates[0]][coordinates[1]] = player;
+};
+
+// for each -1 places an 'X' in the appropriate square, 1 gets 'O', 0 gets '_'
+var renderTable = function () {
+  for (var i = 0; i < board.length; i++) {
+    for (var j = 0; j < board[i].length; j++) {
+      // select node at (row, col), set based on board value
+      // var square = document.getElementById(`${row},${col}`);
+      var square = document.getElementById(`${i},${j}`);
+      square.innerHTML = getPiece(i, j);
+    }
+  }
 };
 
 // Checks for Win
@@ -113,22 +124,9 @@ var checkDiagonals = function () {
   return 0;
 }
 
-// for each -1 places an 'X' in the appropriate square, 1 gets 'O', 0 gets '_'
-var renderTable = function () {
-  for (var i = 0; i < board.length; i++) {
-    for (var j = 0; j < board[i].length; j++) {
-      // select node at (row, col), set based on board value
-      // var square = document.getElementById(`${row},${col}`);
-      var square = document.getElementById(`${i},${j}`);
-      square.innerHTML = getPiece(i, j);
-    }
-  }
-};
-
 var getPiece = function (x, y) {
   return pieces[board[x][y]];
 };
-
 
 // initialization
 renderTable();

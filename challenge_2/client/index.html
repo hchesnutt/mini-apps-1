@@ -1,2 +1,35 @@
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  Input JSON Data Here:
+  <div>
+    <textarea name="json" id="jsoninput" cols="20" rows="5"></textarea>
+  </div>
+  <button id="submitbtn">Submit</button>
+  <script>
+    var submitBtn = $('#submitbtn');
+    submitBtn.click(e => {
+      let textContents = $('#jsoninput')[0].value;
+      $.ajax({
+        url: '/jsondata',
+        method: 'POST',
+        contentType: 'application/json',
+        data: textContents,
+        success: response => {
+          $('<div/>', {
+            text: response
+          }).appendTo('body');
+        },
+        error: err => {
+          console.log('Error: ', err);
+        }
+      }) 
+    })
+  </script>
+</body>
+</html>
