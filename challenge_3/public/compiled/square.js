@@ -1,0 +1,4 @@
+"use strict";
+
+var Square = function Square(props) {};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL2NsaWVudC9zcXVhcmUuanN4Il0sIm5hbWVzIjpbIlNxdWFyZSIsInByb3BzIl0sIm1hcHBpbmdzIjoiOztBQUFBLElBQU1BLFNBQVMsU0FBVEEsTUFBUyxDQUFDQyxLQUFELEVBQVcsQ0FFekIsQ0FGRCIsImZpbGUiOiJzcXVhcmUuanMiLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBTcXVhcmUgPSAocHJvcHMpID0+IHtcblxufSJdfQ==
