@@ -10,33 +10,34 @@ class App extends React.Component {
   }
   onPinsClick(e) {
     const event = Object.assign({}, e);
-    if (event.target.localName !== 'td') return;
-
     const game = this.state.game;
     const pinsDown = parseInt(event.target.innerText);
     let newGame = new Game(game);
-    
+
+    if (event.target.localName !== 'td') return;
+    if (!this.validPinsDown(pinsDown)) return;
+
     newGame.handleRoll(pinsDown);
 
     this.setState({
       game: newGame
     });
   }
+  
+  validPinsDown(pinsDown) {
+    const currFrame = this.state.game.currFrame;
+    return pinsDown <= currFrame.remainingPins;
+  }
+
   render() {
     return (
       <div>
-        <ScoreBoard pinsPerBall={this.state.pinsPerBall}/>
+        <ScoreBoard game={this.state.game}/>
         <PinInput onPinsClick={this.onPinsClick.bind(this)}/>
       </div>
     )
   }
 }
-
-const ScoreBoard = props => (
-  <div>
-    
-  </div>
-);
 
 const PinInput = ({ onPinsClick }) => (
   <div>

@@ -12,13 +12,12 @@ class Game {
     // score appropriate frames
     this.scoreFrames();
     // if currFrame had two rolls add to frames and create new frame as currFrame, reset priorFrame
-    if (currFrame.rolls[0] !== null && currFrame.rolls[1] !== null) {
+    if (currFrame.remainingPins === 0 
+      || (currFrame.rolls[0] !== null && currFrame.rolls[1] !== null)) {
       this.addToFrames(currFrame);
       this.resetPriorFrame();
       this.resetCurrFrame(this.priorFrame);
     }
-    console.log('frames: ', this.frames)
-    
   }
   
   resetPriorFrame() {
@@ -46,12 +45,12 @@ class Game {
     if (!priorFrame) return;
     // if priorFrame remainingPins is 0
     if (priorFrame.remainingPins === 0) {
-        // if first throw -> wait for curr second throw to finish, set score to all 4 throws
+        // STRIKE if first throw -> wait for curr second throw to finish, set score to all 4 throws
         if (priorFrame.rolls[1] !== null) {
           priorFrame.score = 10 + currFrame.rolls[0] + currFrame.rolls[1];
         } else {
           // else set score to all three throws
-          priorFrame.score = 10 + currFrame.rolls[0];
+          priorFrame.score = 20 + currFrame.rolls[0];
         }
     }
   }
@@ -70,6 +69,5 @@ class Frame {
     this.remainingPins -= pins;
     // set ThrowPins
     this.rolls[0] === null ? this.rolls[0] = pins : this.rolls[1] = pins;
-    console.log('addRoll This Frame after:', this);
   }
 }
